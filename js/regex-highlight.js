@@ -31,6 +31,8 @@ class RegexHighlight extends HTMLElement {
   
   set pattern(value) {
     if (this.state.pattern != value) {
+      this.state.pattern = value;
+      this.scheduleRender();
       this.setAttribute("pattern", value);
     }
   }
@@ -41,13 +43,14 @@ class RegexHighlight extends HTMLElement {
   
   set flags(value) {
     if (this.state.flags != value) {
+      this.state.flags = value;
+      this.scheduleRender();
       this.setAttribute("flags", value);
     }
   }
 
   attributeChangedCallback(name, old, value) {
-    this.state[name] = value;
-    this.scheduleRender();
+    this[name] = value;
   }
   
   scheduleRender() {
